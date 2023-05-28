@@ -41,3 +41,24 @@ exports.getExpenses = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
+exports.deleteExpense = async (req, res) => {
+  try {
+    const expenseId = req.params.expenseId; // Assuming the expense ID is passed as a route parameter
+
+    // Find the expense by ID
+    const expense = await Expense.findByPk(expenseId);
+
+    // Check if the expense exists
+    if (!expense) {
+      return res.status(404).json({ error: "Expense not found" });
+    }
+
+    // Delete the expense
+    await expense.destroy();
+
+    res.status(200).json({ message: "Expense deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred" });
+  }
+};
