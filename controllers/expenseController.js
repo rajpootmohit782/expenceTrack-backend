@@ -62,3 +62,15 @@ exports.deleteExpense = async (req, res) => {
     res.status(500).json({ message: "An error occurred" });
   }
 };
+
+exports.getAllExpenses = async (req, res) => {
+  try {
+    const expenses = await Expense.findAll();
+
+    console.log(expenses);
+    res.status(200).json(expenses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: error.message });
+  }
+};
