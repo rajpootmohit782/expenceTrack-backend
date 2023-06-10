@@ -1,5 +1,5 @@
 const Expense = require("../models/Expense");
-
+const fs = require("fs");
 exports.createExpense = async (req, res) => {
   try {
     const { moneySpent, expenseDescription, expenseCategory } = req.body;
@@ -72,5 +72,29 @@ exports.getAllExpenses = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });
+  }
+};
+exports.getDownloadExpenses = async (req, res) => {
+  try {
+    const userId = req.params.userId; // Assuming the user ID is passed as a route parameter
+    console.log(userId);
+
+    // Retrieve expenses associated with the user ID
+    const expenses = await Expense.findAll({ where: { ExpUserId: userId } });
+
+    console.log(expenses);
+
+    // Generate the expenses file content
+    const fileContent = JSON.stringify(expenses, null, 2); // Convert expenses to JSON string with indentation
+
+    // Set the response headers for file download
+    res.setHeader("Content-Type", "application/json");
+    res.setHeader("Content-Disposition", "attachment; filename=expenses.json");
+
+    // Stream the file content as the response
+    res.status(200).send(fileContent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "An error occurred" });
   }
 };

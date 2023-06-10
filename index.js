@@ -9,6 +9,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const resetRoutes = require("./routes/resetRoutes");
 const premiumUserRoutes = require("./routes/premiumUserRoutes");
 const sequelize = require("./db");
+const { getDownloadExpenses } = require("./controllers/expenseController");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -26,6 +27,7 @@ app.use("/salary", salaryRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/api", premiumUserRoutes);
 app.use("/reset", resetRoutes);
+app.use("/download/:userId", getDownloadExpenses);
 
 // Sync database and start server
 sequelize.sync().then(() => {
