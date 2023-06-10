@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const expenseRoutes = require("./routes/expenseRoutes"); // Import the expenseRoutes module
 const salaryRoutes = require("./routes/salaryRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const resetRoutes = require("./routes/resetRoutes");
 const premiumUserRoutes = require("./routes/premiumUserRoutes");
 const sequelize = require("./db");
 
@@ -24,6 +25,7 @@ app.use("/expenses", expenseRoutes); // Use the expenseRoutes middleware for the
 app.use("/salary", salaryRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/api", premiumUserRoutes);
+app.use("/reset", resetRoutes);
 
 // Sync database and start server
 sequelize.sync().then(() => {
