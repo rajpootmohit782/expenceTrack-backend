@@ -1,8 +1,13 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("shopback", "rajpootmohit782", "singhmohit", {
-  host: "db4free.net",
-  dialect: "mysql",
-});
+const sequelize = new Sequelize(
+  process.env.dbname,
+  process.env.myusername,
+  process.env.databasepass,
+  {
+    host: process.env.myhost,
+    dialect: "mysql",
+  }
+);
 
 module.exports = sequelize;
