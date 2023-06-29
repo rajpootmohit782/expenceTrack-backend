@@ -16,7 +16,7 @@ const compression = require("compression");
 const morgan = require("morgan");
 const path = require("path");
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PO || 3000; // Use port 3000 as a default if PORT environment variable is not defined
 
 console.log(PORT);
 
