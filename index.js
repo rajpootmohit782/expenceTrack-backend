@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const fs = require("fs");
 const bodyParser = require("body-parser");
@@ -16,7 +18,7 @@ const compression = require("compression");
 const morgan = require("morgan");
 const path = require("path");
 const app = express();
-const PORT = process.env.PO || 3000; // Use port 3000 as a default if PORT environment variable is not defined
+const PORT = process.env.PORT || 4000; // Use port 3000 as a default if PORT environment variable is not defined
 
 console.log(PORT);
 
